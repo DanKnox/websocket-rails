@@ -106,6 +106,14 @@ module WebsocketRails
       @synchronize = synchronize
     end
 
+    def synchronize_pool_size
+      @synchronize_pool_size ||= 30
+    end
+
+    def synchronize_pool_size=(pool_size)
+      @synchronize_pool_size = pool_size
+    end
+
     def redis_options
       @redis_options ||= redis_defaults
     end
@@ -163,6 +171,14 @@ module WebsocketRails
 
     def default_ping_interval=(interval)
       @default_ping_interval = interval.to_i
+    end
+
+    def trigger_success_by_default
+      @trigger_success_by_default ||= true
+    end
+
+    def trigger_success_by_default= value
+      @trigger_success_by_default = value
     end
 
   end

@@ -44,6 +44,7 @@ module WebsocketRails
     end
 
     def make_private
+      return true if is_private?
       unless config.keep_subscribers_when_private?
         @subscribers.clear
       end
@@ -68,6 +69,8 @@ module WebsocketRails
       begin
         new_token = SecureRandom.uuid
       end while channel_tokens.values.include?(new_token)
+
+      channel_manager.register_channel(@name, new_token)
 
       new_token
     end
